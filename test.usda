@@ -1,0 +1,14 @@
+#usda 1.0
+(
+    defaultPrim = "root"
+    endTimeCode = 1017
+    framesPerSecond = 24
+    metersPerUnit = 1
+    startTimeCode = 1017
+    subLayers = [
+        @./foo@,
+    ]
+    timeCodesPerSecond = 24
+    upAxis = "Y"
+)
+
