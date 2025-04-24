@@ -1,14 +1,13 @@
 {
     "Plugins": [
         {
-            "LibraryPath": "../libURIResolver.so",
-            "Name": "URIResolver",
+            "LibraryPath": "MyAssetResolver.so",
+            "Name": "MyAssetResolver",
             "Type": "library",
             "Info": {
                 "Types": {
-                    "URIResolver" : {
-                        "bases": ["ArResolver"],
-                        "uriSchemes": ["foo", "bar"]
+                    "MyAssetResolver" : {
+                        "bases": ["ArResolver"]
                     }
                 }
             }

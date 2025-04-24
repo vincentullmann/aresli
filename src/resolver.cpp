@@ -6,39 +6,68 @@
 #include "resolver.h"
 
 // IMPORT STD LIBRARIES
-#include <string>
+#include <cstdlib>  // for std::getenv
 #include <iostream>
-
+#include <regex>
+#include <string>
+#include <vector>
 
 PXR_NAMESPACE_OPEN_SCOPE
 
+AR_DEFINE_RESOLVER(MyAssetResolver, ArResolver)
 
-AR_DEFINE_RESOLVER(URIResolver, ArResolver)
+/**
+ * @brief Replace environment variable placeholders
+ *
+ * Replaces placeholders in the format `{env:VAR}` or `{env:VAR:default}` within
+ * the input string with the corresponding environment variable value or a
+ * fallback if the variable is not set.
+ *
+ * @param path The input string potentially containing environment variable
+ * placeholders.
+ * @return A new string with all placeholders replaced with their respective
+ * values or fallbacks.
+ */
+std::string replace_env_vars(const std::string &path) {
 
+    // static const std::regex pattern(R"(\{env:(\w+)(:\w*)?\})");
+    static const std::regex pattern(R"(\{env:([a-zA-Z_]\w*)(?::([^}]*))?\})");
 
-// URIResolver::URIResolver() : ArDefaultResolver() {}
-// URIResolver::~URIResolver() = default;
+    std::string result = path;
 
-// bool URIResolver::IsRelativePath(const std::string& path) {
-    //     return false;
-    // }
-    // Split string
-    // std::vector<std::string> path = TfStringSplit(uri.substr(index + 1), "/");
+    // find all matches
+    std::sregex_iterator begin(path.begin(), path.end(), pattern), end;
+    std::vector<std::smatch> matches(begin, end);
 
+    // Iterate in reverse order to avoid offset issues when replacing strings
+    // with different lenghts
+    for (auto it = matches.rbegin(); it != matches.rend(); ++it) {
+        const auto &match = *it;
+        const std::string var_name = match[1].str();
+        const char *value = std::getenv(var_name.c_str());
 
-ArResolvedPath URIResolver::_Resolve(const std::string& path) const {
+        std::string replacement;
+        if (value) {
+            replacement = value;
+        } else if (match[2].matched) {
+            replacement = match[2].str();
+        } else {
+            replacement = var_name + " NOT FOUND";
+        }
 
-    std::string JOB = std::getenv("JOB");
-
-    std::cout << "URIResolver::Resolve: " << path << std::endl;
-    std::cerr << "URIResolver::Resolve: " << path << std::endl;
-    printf("Passed!\n");
-
-    if (path == "foo:apple") {
-        return ArResolvedPath(JOB + "/yeyeyeyeyey");
+        result.replace(match.position(), match.length(), replacement);
     }
-    return {};
+
+    return result;
 }
 
+
+ArResolvedPath MyAssetResolver::_Resolve(const std::string &input) const {
+
+    std::string path = input;
+
+    path = replace_env_vars(path);
+    return ArResolvedPath(path);
+}
 
 PXR_NAMESPACE_CLOSE_SCOPE

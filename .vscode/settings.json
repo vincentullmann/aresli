@@ -1,0 +1,4 @@
+{
+    "cpplint.repository": "${workspaceFolder}",
+    "cpplint.root": "${workspaceFolder}/src",
+}
