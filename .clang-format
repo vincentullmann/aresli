@@ -1,5 +1,5 @@
 Language: Cpp
-Standard: Cpp17
+Standard: Cpp11
 BasedOnStyle: Google
 IndentWidth: 4
 MaxEmptyLinesToKeep: 2
@@ -8,3 +8,7 @@ ColumnLimit: 140
 # change the public/private keyword indentation form 3 -> 2 spaces
 # (default with Google is -1)
 AccessModifierOffset: 0
+
+
+AllowShortFunctionsOnASingleLine: None
+AllowShortLambdasOnASingleLine: None

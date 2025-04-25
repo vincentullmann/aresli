@@ -12,6 +12,7 @@
 // IMPORT LOCAL LIBRARIES
 #include "env_vars.h"
 #include "resolver.h"
+#include "version_token.h"
 
 
 PXR_NAMESPACE_OPEN_SCOPE
@@ -24,6 +25,7 @@ ArResolvedPath Aresli::_Resolve(const std::string &input) const {
     std::string path = input;
 
     path = replace_env_vars(path);
+    path = resolve_version_tokens(path);
     return ArResolvedPath(path);
 }
 
