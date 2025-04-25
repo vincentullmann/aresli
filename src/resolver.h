@@ -10,14 +10,13 @@ PXR_NAMESPACE_OPEN_SCOPE
 
 
 class Aresli : public ArDefaultResolver {
-
-  public:
+    public:
     Aresli() = default;
     ~Aresli() override = default;
 
     // bool IsRelativePath(const std::string& path) override;
 
-  protected:
+    protected:
     ArResolvedPath _Resolve(const std::string &path) const;
 };
 

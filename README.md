@@ -6,13 +6,10 @@ A simple toy asset resolver for experimenting with custom path resolution logic 
 
 ### Environment Variable Substitution
 
-Supports dynamic substitution of environment variables within asset paths using the following syntax:
-
-Syntax: `{env:VAR_NAME}`
+Supports dynamic substitution of environment variables within asset paths using the following syntax: `{env:VAR_NAME:fallback}`
 
 ```bash
 export SHOT=sh010
-
 @caches/{env:SHOT}_cache.usd@       # Resolves to: caches/sh010_cache.usd
 
 # With default fallback value
