@@ -1,12 +1,12 @@
 {
     "Plugins": [
         {
-            "LibraryPath": "MyAssetResolver.so",
-            "Name": "MyAssetResolver",
+            "LibraryPath": "Aresli.so",
+            "Name": "Aresli",
             "Type": "library",
             "Info": {
                 "Types": {
-                    "MyAssetResolver" : {
+                    "Aresli" : {
                         "bases": ["ArResolver"]
                     }
                 }

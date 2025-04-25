@@ -9,11 +9,11 @@
 PXR_NAMESPACE_OPEN_SCOPE
 
 
-class MyAssetResolver : public ArDefaultResolver {
+class Aresli : public ArDefaultResolver {
 
   public:
-    MyAssetResolver() = default;
-    ~MyAssetResolver() override = default;
+    Aresli() = default;
+    ~Aresli() override = default;
 
     // bool IsRelativePath(const std::string& path) override;
 

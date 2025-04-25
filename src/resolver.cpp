@@ -14,7 +14,7 @@
 
 PXR_NAMESPACE_OPEN_SCOPE
 
-AR_DEFINE_RESOLVER(MyAssetResolver, ArResolver)
+AR_DEFINE_RESOLVER(Aresli, ArResolver)
 
 /**
  * @brief Replace environment variable placeholders
@@ -62,7 +62,7 @@ std::string replace_env_vars(const std::string &path) {
 }
 
 
-ArResolvedPath MyAssetResolver::_Resolve(const std::string &input) const {
+ArResolvedPath Aresli::_Resolve(const std::string &input) const {
 
     std::string path = input;
 

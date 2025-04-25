@@ -7,7 +7,7 @@ dist_dir  ?= dist
 SRC_PATH := src
 SRC_EXT = cpp
 
-name = MyAssetResolver
+name = Aresli
 
 
 # code lists #
